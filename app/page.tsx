@@ -1,27 +1,6 @@
-import type { IconType } from "react-icons";
-import {
-  SiGooglechrome,
-  SiDocker,
-  SiExpress,
-  SiFastapi,
-  SiFirebase,
-  SiFlutter,
-  SiGithub,
-  SiJavascript,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiOpenai,
-  SiOpenjdk,
-  SiPostgresql,
-  SiPrisma,
-  SiPython,
-  SiReact,
-  SiStripe,
-  SiSupabase,
-  SiTailwindcss,
-  SiTypescript,
-  SiVercel,
-} from "react-icons/si";
+"use client";
+
+const email = "bavdullahub@gmail.com";
 
 const projects = [
   {
@@ -30,7 +9,6 @@ const projects = [
       "Won 1st place at the McMaster Google Solutions Challenge. A learning app that uses GPT-4 to generate short project briefs from a prompt.",
     tags: ["Next.js", "TypeScript", "OpenAI", "Firebase", "Vercel"],
     liveUrl: "https://deep-end.vercel.app",
-    githubUrl: "https://github.com/benjiavdullahu/DeepEnd-hackathon",
   },
   {
     name: "BidBoard",
@@ -38,7 +16,6 @@ const projects = [
       "A pay-to-rank leaderboard with Stripe checkout. Hit 5,000 visitors and $100 in revenue the first week through organic traffic.",
     tags: ["Next.js", "TypeScript", "Stripe", "PostgreSQL", "Prisma"],
     liveUrl: "https://bidboard.site",
-    githubUrl: "https://github.com/benjiavdullahu/BidBoard",
   },
   {
     name: "Intellex",
@@ -46,40 +23,8 @@ const projects = [
       "Won DeltaHacks X. A peer-to-peer skill-sharing platform with live video lessons over WebRTC.",
     tags: ["Next.js", "React", "WebRTC", "Firebase", "Node.js"],
     liveUrl: "https://intellex.vercel.app",
-    githubUrl: "https://github.com/benjiavdullahu/intellex",
   },
 ];
-
-type Skill = {
-  name: string;
-  Icon: IconType;
-  color: string;
-};
-
-const skills: Skill[] = [
-  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
-  { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
-  { name: "Java", Icon: SiOpenjdk, color: "#F89820" },
-  { name: "Next.js", Icon: SiNextdotjs, color: "#FFFFFF" },
-  { name: "React", Icon: SiReact, color: "#61DAFB" },
-  { name: "Node.js", Icon: SiNodedotjs, color: "#5FA04E" },
-  { name: "Express", Icon: SiExpress, color: "#FFFFFF" },
-  { name: "Tailwind", Icon: SiTailwindcss, color: "#38BDF8" },
-  { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
-  { name: "Prisma", Icon: SiPrisma, color: "#FFFFFF" },
-  { name: "Firebase", Icon: SiFirebase, color: "#FFCA28" },
-  { name: "Supabase", Icon: SiSupabase, color: "#3ECF8E" },
-  { name: "Stripe", Icon: SiStripe, color: "#635BFF" },
-  { name: "Flutter", Icon: SiFlutter, color: "#02569B" },
-  { name: "Python", Icon: SiPython, color: "#3776AB" },
-  { name: "FastAPI", Icon: SiFastapi, color: "#009688" },
-  { name: "OpenAI", Icon: SiOpenai, color: "#FFFFFF" },
-  { name: "Docker", Icon: SiDocker, color: "#2496ED" },
-  { name: "GitHub", Icon: SiGithub, color: "#FFFFFF" },
-  { name: "Vercel", Icon: SiVercel, color: "#FFFFFF" },
-];
-
-const marqueeSkills = [...skills, ...skills];
 
 function MailIcon() {
   return (
@@ -106,12 +51,8 @@ function LinkedInIcon() {
   );
 }
 
-function DownloadIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16" />
-    </svg>
-  );
+function copyEmail() {
+  void navigator.clipboard.writeText(email);
 }
 
 export default function Home() {
@@ -122,17 +63,6 @@ export default function Home() {
       <div className="grain" />
 
       <div className="content">
-        <nav className="top-nav" aria-label="Primary navigation">
-          <a href="#work">Work</a>
-          <a href="#stack">Stack</a>
-          <a href="/resume.pdf" target="_blank" rel="noreferrer">
-            Resume
-          </a>
-          <a className="nav-pill" href="#contact">
-            Contact
-          </a>
-        </nav>
-
         <section className="hero" aria-labelledby="intro-title">
           <h1 id="intro-title">Benjamin Avdullahu</h1>
           <p>
@@ -141,10 +71,15 @@ export default function Home() {
           </p>
 
           <div className="contact-links" aria-label="Contact links">
-            <a className="pill pill-primary" href="mailto:bavdullahub@gmail.com">
+            <button
+              className="pill pill-primary"
+              type="button"
+              onClick={copyEmail}
+              title="Copy email"
+            >
               <MailIcon />
-              <span>bavdullahub@gmail.com</span>
-            </a>
+              <span>{email}</span>
+            </button>
             <a
               className="pill"
               href="https://github.com/benjiavdullahu"
@@ -163,10 +98,6 @@ export default function Home() {
               <LinkedInIcon />
               <span>in/benjaminavdullahu</span>
             </a>
-            <a className="pill" href="/resume.pdf" target="_blank" rel="noreferrer">
-              <DownloadIcon />
-              <span>Resume</span>
-            </a>
           </div>
         </section>
 
@@ -176,24 +107,14 @@ export default function Home() {
           </header>
           <div className="project-list">
             {projects.map((project) => (
-              <article className="project" key={project.name}>
-                <div className="project-title-row">
-                  <h3>
-                    <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                      {project.name}
-                    </a>
-                  </h3>
-                  <div className="project-links" aria-label={`${project.name} links`}>
-                    <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                      <SiGooglechrome aria-hidden="true" />
-                      <span>Live</span>
-                    </a>
-                    <a href={project.githubUrl} target="_blank" rel="noreferrer">
-                      <SiGithub aria-hidden="true" />
-                      <span>GitHub</span>
-                    </a>
-                  </div>
-                </div>
+              <a
+                className="project"
+                href={project.liveUrl}
+                key={project.name}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <h3>{project.name}</h3>
                 <p>{project.description}</p>
                 <div className="tag-row" aria-label={`${project.name} stack`}>
                   {project.tags.map((tag) => (
@@ -202,24 +123,8 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
-              </article>
+              </a>
             ))}
-          </div>
-        </section>
-
-        <section id="stack" className="section stack-section">
-          <header className="stack-heading">
-            <h2>Skills</h2>
-          </header>
-          <div className="marquee" aria-label="Technology stack">
-            <div className="marquee-track">
-              {marqueeSkills.map(({ Icon, ...skill }, index) => (
-                <div className="skill" key={`${skill.name}-${index}`}>
-                  <Icon className="skill-logo" style={{ color: skill.color }} />
-                  <span>{skill.name}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -229,17 +134,9 @@ export default function Home() {
             <p>Best way to reach me is email.</p>
           </div>
           <div className="cta-actions">
-            <a className="button button-primary" href="mailto:bavdullahub@gmail.com">
-              bavdullahub@gmail.com
-            </a>
-            <a
-              className="button button-ghost"
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Resume
-            </a>
+            <button className="button button-primary" type="button" onClick={copyEmail}>
+              {email}
+            </button>
           </div>
         </section>
 
@@ -252,7 +149,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              <SiGithub aria-hidden="true" />
+              <GithubIcon />
             </a>
             <a
               href="https://www.linkedin.com/in/benjaminavdullahu"
@@ -262,9 +159,9 @@ export default function Home() {
             >
               <LinkedInIcon />
             </a>
-            <a href="mailto:bavdullahub@gmail.com" aria-label="Email">
+            <button type="button" onClick={copyEmail} aria-label="Copy email">
               <MailIcon />
-            </a>
+            </button>
           </div>
         </footer>
       </div>
